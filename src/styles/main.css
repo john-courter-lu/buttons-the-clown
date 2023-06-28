@@ -11,6 +11,7 @@ textarea {
 	font-family: "Comfortaa", Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.5;
+
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -22,10 +23,13 @@ h1,h2,h3,h4,h5,h6 {
 --------------------------------------------------------------*/
 .serviceForm{
     display: flex;
+    flex-direction:column;  
 }
 
 .field{
-    flex-direction: column;
+    display: flex;
+    flex-direction:column;
+    margin: 0.5rem 0;
 }
 
 .label{
@@ -35,5 +39,22 @@ h1,h2,h3,h4,h5,h6 {
 .button{
     color:antiquewhite;
     background-color:black;
-    
+    width:10rem;
+    height:3rem;
+    margin: 2rem 0;
+    padding: 0.5rem;
 }
+
+/*
+感受:
+  整体
+    整个serviceForm section(包括field和button)是flex,而且是一个一行;
+    整个field(包括lable和input)也是flex,而且也是一个一行;
+    field之间/上下要有margin
+    button上下也要有margin
+  
+  细节
+    button的细节:要有padding,这样button比文字大; 
+    button左右不需要margin, 这样button是左对齐;
+
+*/
