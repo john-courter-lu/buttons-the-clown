@@ -7,42 +7,63 @@ button,
 input,
 select,
 textarea {
-	color: #404040;
-	font-family: "Comfortaa", Arial, sans-serif;
-	font-size: 14px;
-	line-height: 1.5;
+  background: #404040;
+  color: antiquewhite;
+  font-family: "Comfortaa", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
 
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Patua One", serif;
   letter-spacing: 2px;
 }
 
 /*Detials
 --------------------------------------------------------------*/
-.serviceForm{
-    display: flex;
-    flex-direction:column;  
+.serviceForm {
+  display: flex;
+  flex-direction: column;
 }
 
-.field{
-    display: flex;
-    flex-direction:column;
-    margin: 0.5rem 0;
+.field {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
 }
 
-.label{
-    font-size: 1.2 rem;
+.label {
+  font-size: 1.2 rem;
 }
 
-.button{
-    color:antiquewhite;
-    background-color:black;
-    width:10rem;
-    height:3rem;
-    margin: 2rem 0;
-    padding: 0.5rem;
+input {
+  background-color: dimgray;
+}
+
+.button {
+  color: antiquewhite;
+  background-color: blueviolet;
+  width: 10rem;
+  height: 3rem;
+  margin: 2rem 0;
+  padding: 0.5rem;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+li {
+  background-color: dimgray;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
 }
 
 /*
@@ -56,5 +77,16 @@ h1,h2,h3,h4,h5,h6 {
   细节
     button的细节:要有padding,这样button比文字大; 
     button左右不需要margin, 这样button是左对齐;
+
+*/
+
+/*
+ul 
+去掉圆点
+去掉每行缩进
+
+li
+增加上下margin
+增加四周padding
 
 */

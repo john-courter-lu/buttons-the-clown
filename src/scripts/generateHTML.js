@@ -1,4 +1,4 @@
-
+import { fetchResources, getRequests } from "./dataAccess.js"
 
 export const generateServiceFormSectionHTML = () => {
     return `
@@ -36,17 +36,23 @@ export const generateServiceFormSectionHTML = () => {
     `
 }
 
+
+// Section 2 HTML
+export const mapObjectToListElement = (obj) => {
+    return `<li>${obj.id}: ${obj.childName}'s birthday for ${obj.numberOfChildren} kids on ${obj.date}</li>`
+}
+
 export const generateRequestsSectionHTML = () => {
     const requests = getRequests()
-    
     return `
         <ul>
-            ${requests.map(convertRequestToListElement).join("")
+            ${requests.map(mapObjectToListElement).join("")
         }
         </ul>
     `
 }
 
+// Main Container HTML
 export const generateHTML = () => {
     return `
     <h1>Buttons The Clown</h1>
@@ -57,12 +63,17 @@ export const generateHTML = () => {
 
     <section class="serviceRequests">
         <h2>Service Requests</h2>
-      
+        ${generateRequestsSectionHTML()}
     </section>
 `
 }
 
+// Render HTML
 const mainContainer = document.querySelector("#container")
 export const renderMainContainerHTML =()=>{
-    mainContainer.innerHTML = generateHTML()
+    fetchResources('requests').then(
+        () => {
+            mainContainer.innerHTML = generateHTML()
+        }
+    )
 }

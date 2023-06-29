@@ -13,3 +13,15 @@ export const postRequest = (dataCollectedFromInput) => {
         .then(res => res.json())
         .then(() => { mainContainer.dispatchEvent(new CustomEvent('stateChanged')) })
 }
+
+const applicationState = {}
+
+export const fetchResources = (resourceArrayNameString) => {
+    return fetch(`${API}/${resourceArrayNameString}`).then(res => res.json())
+        .then((fetchedArray) => { applicationState[resourceArrayNameString] = fetchedArray })
+}
+
+
+export const getRequests = () => applicationState.requests.map(obj => ({ ...obj }))
+export const getClowns = () => applicationState.clowns.map(obj => ({ ...obj }))
+export const getCompletions = () => applicationState.completions.map(obj => ({ ...obj }))
