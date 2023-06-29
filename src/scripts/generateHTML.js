@@ -1,7 +1,7 @@
 
 
-export const ServiceForm = () => {
-    let html = `
+export const generateServiceFormSectionHTML = () => {
+    return `
     <div class="field">
         <label class="label" for="parentName">Parent Name</label>
         <input type="text" name="parentName" class="input" />
@@ -23,8 +23,8 @@ export const ServiceForm = () => {
     </div>
     
     <div class="field">
-    <label class="label" for="serviceDate">Date Needed</label>
-    <input type="date" name="serviceDate" class="input" />
+    <label class="label" for="date">Date Needed</label>
+    <input type="date" name="date" class="input" />
     </div>
     
     <div class="field">
@@ -34,8 +34,17 @@ export const ServiceForm = () => {
     
     <button class="button" id="submitRequest">Submit Request</button>
     `
+}
 
-    return html
+export const generateRequestsSectionHTML = () => {
+    const requests = getRequests()
+    
+    return `
+        <ul>
+            ${requests.map(convertRequestToListElement).join("")
+        }
+        </ul>
+    `
 }
 
 export const generateHTML = () => {
@@ -43,7 +52,7 @@ export const generateHTML = () => {
     <h1>Buttons The Clown</h1>
 
     <section class="serviceForm">
-        ${ServiceForm()}
+        ${generateServiceFormSectionHTML()}
     </section>
 
     <section class="serviceRequests">
@@ -51,4 +60,9 @@ export const generateHTML = () => {
       
     </section>
 `
+}
+
+const mainContainer = document.querySelector("#container")
+export const renderMainContainerHTML =()=>{
+    mainContainer.innerHTML = generateHTML()
 }
