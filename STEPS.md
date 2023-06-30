@@ -120,4 +120,22 @@
 
 4. 有删除按钮,同时点击删除时,执行DELETE method,从database.json中删除这个request
    1. 在HTML中,增加DELETE按钮
+      1. 
+      按钮加在<li></li>中. 但是<button> tag内要写什么?
+      答案取决于我button 的 click events: delete 这个request. 所以我需要 id="delete-{request.id}"
+      2. 
+      CSS delete button
+      把li中的三个元素用flex space-between来排列;
+      对文字用<p></p>来包围住,同时指定格式来固定三个元素的绝对位置
+
    2. 为这个按钮增加click event listener, callback function是fetch: DELETE, 估计最后也要dispatch "stateChanged"
+      1. event listener
+      2. deleteRequest 注意: 1 有parameter 2. fetch的url中有requests/id
+
+   3. debug 为了改进
+      1. 成功. 
+      2. 可选: 用dataset.id在click events中.测试出错. 看book4 self assessment
+      3. 可选: 需要固定delete button和dropdown control两个的高度, 在放缩时, p显示为多行时, 保证样式统一
+
+5. 有dropdown control/element. 功能: 用户选择时,把这个request加入completions array.
+   1. HTML中增加

@@ -32,14 +32,21 @@ export const generateServiceFormSectionHTML = () => {
     <input type="number" name="lengthOfHour" class="input" />
     </div>
     
-    <button class="button" id="submitRequest">Submit Request</button>
+    <button id="submitButton">Submit Request</button>
     `
 }
 
 
 // Section 2 HTML
-export const mapObjectToListElement = (obj) => {
-    return `<li>${obj.id}: ${obj.childName}'s birthday for ${obj.numberOfChildren} kids on ${obj.date}</li>`
+export const mapObjectToListElement = (request) => {
+    return `
+    <li>
+        <p>
+            ${request.id}: ${request.childName}'s birthday for ${request.numberOfChildren} kids on ${request.date}
+        </p>
+        <select><option>Choose</option></select>
+        <button class="deleteButton" data-id="${request.id}" id="delete--${request.id}">DELETE</button>
+    </li>`
 }
 
 export const generateRequestsSectionHTML = () => {

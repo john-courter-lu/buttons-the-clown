@@ -46,7 +46,7 @@ input {
   background-color: dimgray;
 }
 
-.button {
+#submitButton {
   color: antiquewhite;
   background-color: blueviolet;
   width: 10rem;
@@ -63,6 +63,14 @@ ul {
 li {
   background-color: dimgray;
   margin: 0.5rem 0;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+li p {
+  flex-basis: 60%;
+  margin: 0;
   padding: 0.5rem;
 }
 
@@ -89,4 +97,8 @@ li
 增加上下margin
 增加四周padding
 
+*/
+
+/*
+li p 是为了固定文字/dropdown/delete button三者的位置
 */

@@ -55,15 +55,6 @@
       "date": "2023-07-29",
       "lengthOfHour": 2,
       "id": 5
-    },
-    {
-      "parentName": "test",
-      "childName": "test",
-      "numberOfChildren": "1",
-      "address": "test",
-      "date": "2023-06-29",
-      "lengthOfHour": "1",
-      "id": 6
     }
   ]
 }

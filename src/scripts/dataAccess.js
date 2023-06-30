@@ -1,4 +1,4 @@
-
+// fetch: POST 
 const API = 'http://localhost:8084'
 const mainContainer = document.querySelector("#container")
 
@@ -14,14 +14,24 @@ export const postRequest = (dataCollectedFromInput) => {
         .then(() => { mainContainer.dispatchEvent(new CustomEvent('stateChanged')) })
 }
 
+// fetch: GET 
+// getter functions
 const applicationState = {}
 
 export const fetchResources = (resourceArrayNameString) => {
-    return fetch(`${API}/${resourceArrayNameString}`).then(res => res.json())
+    return fetch(`${API}/${resourceArrayNameString}`)
+        .then(res => res.json())
         .then((fetchedArray) => { applicationState[resourceArrayNameString] = fetchedArray })
 }
-
 
 export const getRequests = () => applicationState.requests.map(obj => ({ ...obj }))
 export const getClowns = () => applicationState.clowns.map(obj => ({ ...obj }))
 export const getCompletions = () => applicationState.completions.map(obj => ({ ...obj }))
+
+// fetch: DELETE
+
+export const deleteRequest = (idNumber) => {
+    return fetch(`${API}/requests/${idNumber}`, { method: "DELETE" })
+        .then(res => res.json())
+        .then(() => { mainContainer.dispatchEvent(new CustomEvent('stateChanged')) })
+}
