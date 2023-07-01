@@ -65,14 +65,35 @@ li {
   margin: 0.5rem 0;
   padding: 0.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
+}
+
+li :first-child {
+  flex-basis: 60%;
 }
 
 li p {
-  flex-basis: 60%;
   margin: 0;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
 }
+
+li select {
+  height: 2rem;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+li button {
+  height: 2rem;
+  margin-left: auto;
+}
+
+.completedList,
+.listTitle {
+  background: darkolivegreen;
+}
+
+
 
 /*
 感受:
@@ -100,5 +121,8 @@ li
 */
 
 /*
-li p 是为了固定文字/dropdown/delete button三者的位置
+li p 是为了固定文字/dropdown/delete button三者的位置, 
+把flex-basis: 15%; 用在后面两个element上面没效果.
+
+li select, li button是为了在放缩时, p显示为多行时, 保证样式统一.
 */

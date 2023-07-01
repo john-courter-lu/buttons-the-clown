@@ -135,7 +135,71 @@
    3. debug 为了改进
       1. 成功. 
       2. 可选: 用dataset.id在click events中.测试出错. 看book4 self assessment
-      3. 可选: 需要固定delete button和dropdown control两个的高度, 在放缩时, p显示为多行时, 保证样式统一
+      3. 成功: 需要固定delete button和dropdown control两个的高度, 在放缩时, p显示为多行时, 保证样式统一.
+      4. 成功: 需要加入一行说明 Description ; Completed By; 同时每一行之前用一个🤡emoji.
+         解答: 增加一个<li></li> 里面两个<h3>, class要写一下, 为了格式. 
+         格式做成justify-content:left; li :first-child{flex-basis:60%} 背景色也改一下.
+
 
 5. 有dropdown control/element. 功能: 用户选择时,把这个request加入completions array.
-   1. HTML中增加
+   1. HTML中增加这个elements
+   2. 考虑"change" events的event listener
+      如何把这个增加进去? 需要在其中收集用户选择到一个空的obj中, 再用 postCompletion去post it.
+      
+      发现: select和option的配合中,在eventlistener里只能用id 和 value来读取数据.
+      考虑: 第一步先不涉及读取clowns这个database的array,直接把它们的id hard coded
+      
+   3. 在database.json中检查是否post成功.
+   4. debug
+      1. 成功: 把postCompletion和postRequest合二为一,只需要增加一个parameter
+      2. 成功: 去掉select,如果request已经完成了的话.(发现book6的self-assessment没有任何code的提示,所以还是要自己想办法)
+         首先在render html前要fetch最新数据:
+            fetchResources('requests')
+            .then(() => {fetchResources('completions')}) 
+            这里会出错. 因为arrow function 要么在大括号中写code,要么直接在arrow后面写function.
+         正确写法:
+            fetchResources('requests')
+            .then(() => fetchResources('completions'))
+
+
+      然后,要设置正确的conditional
+         看看能不能找回符合条件的obj: 用some , 返回值是true or false
+            const foundCompletion = completions.some(obj => Number(obj.requestId) === request.id)
+
+            if (foundCompletion === true) 
+
+         或者用.find() 但是在if里不能用==true或=== true:
+
+            const foundCompletion = completions.find(obj => Number(obj.requestId) === request.id)
+
+            if (foundCompletion) 
+
+      3. 成功: 取消hard-coded clown.id : 读取clowns这个database的array,map它们的id到select-option中. 这里需要render前的fetchClowns, map前的getClowns, 和.map().join()
+      4. 成功: 必做: requests要按照时间排序. 
+         解答: 在生成HTML的函数中 requests.map()之前用requests.sort()
+      5. 可选: Modify the getRequests() method in the data access module to return an array of service request objects that are sorted by their completion status.
+         解答: function compareNumbers(a, b) {
+                     return a - b;
+                     }
+               .sort(compareNumbers)
+               可以完成array数字从小到大排列.
+
+               const numbers = [3, 1, 4, 1, 5];
+               // [...numbers] creates a shallow copy, so sort() does not mutate the original
+               const sorted = [...numbers].sort((a, b) => a - b);
+
+               .sort((a, b) => a - b) 和 .sort((a, b) => (a < b ? -1 : 0)) 都会把小的数排到前面
+
+               the compareFunction needs to return -1,0, or 1,
+               但用boolean对比时 用Number() 就会convert false into 0 and true into 1 ,
+               用 .sort((a, b) => a - b) 结果一般时fasle在前面,true在后面.
+         成功: 更新了getRequests(),在其中先根据date来sort,后根据是否能在completions数组里找到它,来给request加一个property: completed: true or false; 然后根据completed的大小来排序(false是0, true是1 ).
+               同时修改了HTML map()中直接用completed property来对比.
+         
+         反思: 也可以在做ERD的时候,request就应该有一个property: completed: true or false.默认为false.
+               在给database.json传递input时,就要把这个加上.
+               在select change时,把相应的request的 completed改为true. 
+               但问题: 这除了post to completions,还要修改database中的requests, 可以用POST实现吗? 待证实.
+               也思考: 估计没有修改的method, 因为不希望有人修改database.json.中的某个property的某个值.
+       6. completed taks的背景色改变.
+         解答: 在completed list HTML 中加入class. 在css中设置这个class的background.

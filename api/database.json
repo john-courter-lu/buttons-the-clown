@@ -9,7 +9,26 @@
       "name": "Leslie"
     }
   ],
-  "completions": [],
+  "completions": [
+    {
+      "requestId": "2",
+      "clownId": "1",
+      "dateCompleted": 1688157981142,
+      "id": 2
+    },
+    {
+      "requestId": "3",
+      "clownId": "2",
+      "dateCompleted": 1688158723805,
+      "id": 3
+    },
+    {
+      "requestId": "1",
+      "clownId": "1",
+      "dateCompleted": 1688164656942,
+      "id": 4
+    }
+  ],
   "requests": [
     {
       "parentName": "Adam Thompson",

@@ -1,4 +1,4 @@
-import { fetchResources, getRequests } from "./dataAccess.js"
+import { getRequests, getClowns } from "./dataAccess.js"
 
 export const generateServiceFormSectionHTML = () => {
     return `
@@ -39,20 +39,42 @@ export const generateServiceFormSectionHTML = () => {
 
 // Section 2 HTML
 export const mapObjectToListElement = (request) => {
-    return `
-    <li>
-        <p>
-            ${request.id}: ${request.childName}'s birthday for ${request.numberOfChildren} kids on ${request.date}
-        </p>
-        <select><option>Choose</option></select>
-        <button class="deleteButton" data-id="${request.id}" id="delete--${request.id}">DELETE</button>
-    </li>`
+    const clowns = getClowns()
+
+    if (request.completed === true) {
+        return `
+        <li class = 'completedList'>
+            <p>
+                🤡Completed: ${request.childName}'s birthday on ${request.date}.
+            </p>
+            <button class="deleteButton" data-id="${request.id}" id="delete--${request.id}">DELETE</button>
+        </li>`
+    } else {
+        return `
+        <li>
+            <p>
+                🤡${request.childName}'s birthday for ${request.numberOfChildren} kids on ${request.date}
+            </p>
+            <select id='completedBy'>
+                <option value='option-0'>Choose</option>
+                ${clowns.map(clown => `
+                    <option value='${request.id}--${clown.id}'>${clown.name}</option>
+                ` )}.join(' ')
+            </select>
+            <button class="deleteButton" data-id="${request.id}" id="delete--${request.id}">DELETE</button>
+        </li>`
+    }
 }
 
 export const generateRequestsSectionHTML = () => {
     const requests = getRequests()
+
     return `
         <ul>
+        <li class = 'listTitle'>
+            <h3>Description</h3>
+            <h3>Completed By</h3>
+        </li>
             ${requests.map(mapObjectToListElement).join("")
         }
         </ul>
@@ -75,12 +97,4 @@ export const generateHTML = () => {
 `
 }
 
-// Render HTML
-const mainContainer = document.querySelector("#container")
-export const renderMainContainerHTML =()=>{
-    fetchResources('requests').then(
-        () => {
-            mainContainer.innerHTML = generateHTML()
-        }
-    )
-}
+// Render HTML 在main.js中因为涉及多次fetch
