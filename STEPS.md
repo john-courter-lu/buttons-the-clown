@@ -138,7 +138,7 @@
       3. 成功: 需要固定delete button和dropdown control两个的高度, 在放缩时, p显示为多行时, 保证样式统一.
       4. 成功: 需要加入一行说明 Description ; Completed By; 同时每一行之前用一个🤡emoji.
          解答: 增加一个<li></li> 里面两个<h3>, class要写一下, 为了格式. 
-         格式做成justify-content:left; li :first-child{flex-basis:60%} 背景色也改一下.
+         格式做成justify-content:left; li :first-child{flex-basis:60%} 背景色也改一下, li button{margin-left:auto}会占据最大格,导致靠右.
 
 
 5. 有dropdown control/element. 功能: 用户选择时,把这个request加入completions array.
@@ -176,8 +176,8 @@
 
       3. 成功: 取消hard-coded clown.id : 读取clowns这个database的array,map它们的id到select-option中. 这里需要render前的fetchClowns, map前的getClowns, 和.map().join()
       4. 成功: 必做: requests要按照时间排序. 
-         解答: 在生成HTML的函数中 requests.map()之前用requests.sort()
-      5. 可选: Modify the getRequests() method in the data access module to return an array of service request objects that are sorted by their completion status.
+         解答: 在生成HTML的函数中requests.map()之前 或getRequests()中 用requests.sort()
+      5. 可选: completed tasks都排在最后
          解答: function compareNumbers(a, b) {
                      return a - b;
                      }
